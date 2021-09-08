@@ -32,7 +32,22 @@ app.use((ctx, next) => {
   return proxy('/', {
     target,
     changeOrigin: true,
-    logs: true,
+    logs(context, target) {
+      // console.log(context.req.headers);
+      // console.log(context.request.headers);
+    },
+    events: {
+      proxyReq(client, request, response) {
+        console.clear();
+        client.removeHeader('referer');
+        client.removeHeader('origin');
+
+        console.log('client', client.getHeaders());
+
+        console.log('request', request.headers);
+        console.log('response', response.getHeaders());
+      },
+    },
   })(ctx, next);
 });
 
