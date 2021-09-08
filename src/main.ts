@@ -39,3 +39,4 @@ app.use((ctx, next) => {
 app.listen(port);
 
 console.log(`listening on port ${port}`);
+console.log(`target regex ${targetRegex}`);
