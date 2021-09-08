@@ -4,7 +4,7 @@ import proxy from 'koa-proxies';
 
 const app = new Koa();
 const port = process.env.PORT || 8090;
-const targetRegex = process.env.TARGET_REGEX || '/\\.inshur\\.com$';
+const targetRegex = process.env.TARGET_REGEX || '\\.inshur\\.com$';
 
 app.use(cors());
 
