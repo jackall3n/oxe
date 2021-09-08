@@ -11,9 +11,7 @@
   "dependencies": {
     "@koa/cors": "^3.1.0",
     "koa": "^2.13.1",
-    "koa-proxies": "^0.12.1"
-  },
-  "devDependencies": {
+    "koa-proxies": "^0.12.1",
     "@types/koa": "^2.13.4",
     "@types/node": "^14.14.36",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
