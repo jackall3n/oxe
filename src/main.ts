@@ -46,8 +46,8 @@ app.use((ctx, next) => {
       },
       proxyReq(client, request, response) {
         console.log('--- PROXY REQ ---');
-        client.removeHeader('referer');
-        client.removeHeader('origin');
+        // client.removeHeader('referer');
+        // client.removeHeader('origin');
         client.removeHeader('x-forwarded-for');
         client.removeHeader('x-forwarded-proto');
         client.removeHeader('x-forwarded-port');
