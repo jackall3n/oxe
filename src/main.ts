@@ -1,4 +1,5 @@
 import Koa from 'koa';
+import logger from 'koa-logger';
 import cors from '@koa/cors';
 import proxy from 'koa-proxies';
 
@@ -7,12 +8,11 @@ const port = process.env.PORT || 8090;
 const targetRegex =
   process.env.TARGET_REGEX || '\\.(hidrateapp\\.com|inshur\\.com)$';
 
+app.use(logger());
 app.use(cors());
 
 app.use((ctx, next) => {
   const target = ctx.headers['target'] as string;
-
-  console.log(target);
 
   if (!target) {
     ctx.status = 400;
@@ -54,6 +54,8 @@ app.use((ctx, next) => {
         client.removeHeader('postman-token');
 
         console.log('client', client.getHeaders());
+        console.log('path', client.path);
+
         console.log('request', request.headers);
         console.log('response', response.getHeaders());
       },
