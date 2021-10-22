@@ -4,7 +4,8 @@ import proxy from 'koa-proxies';
 
 const app = new Koa();
 const port = process.env.PORT || 8090;
-const targetRegex = process.env.TARGET_REGEX || '\\.inshur\\.com$';
+const targetRegex =
+  process.env.TARGET_REGEX || '\\.(hidrateapp\\.com|inshur\\.com)$';
 
 app.use(cors());
 
@@ -33,14 +34,18 @@ app.use((ctx, next) => {
     target,
     changeOrigin: true,
     logs(context, target) {
-      // console.log(context.req.headers);
-      // console.log(context.request.headers);
+      console.log(target, context.req.headers);
+      console.log(target, context.request.headers);
     },
     events: {
       proxyReq(client, request, response) {
         console.clear();
         client.removeHeader('referer');
         client.removeHeader('origin');
+        client.removeHeader('x-forwarded-for');
+        client.removeHeader('x-forwarded-proto');
+        client.removeHeader('x-forwarded-port');
+        client.removeHeader('postman-token');
 
         console.log('client', client.getHeaders());
 
