@@ -38,8 +38,14 @@ app.use((ctx, next) => {
       console.log(target, context.request.headers);
     },
     events: {
+      proxyRes: (proxyRes, req, res) => {
+        console.log('--- PROXY RES ---');
+        console.log('req', req.headers);
+        console.log('res', res.getHeaders());
+        console.log('proxyRes', proxyRes.headers);
+      },
       proxyReq(client, request, response) {
-        console.clear();
+        console.log('--- PROXY REQ ---');
         client.removeHeader('referer');
         client.removeHeader('origin');
         client.removeHeader('x-forwarded-for');
@@ -48,7 +54,6 @@ app.use((ctx, next) => {
         client.removeHeader('postman-token');
 
         console.log('client', client.getHeaders());
-
         console.log('request', request.headers);
         console.log('response', response.getHeaders());
       },
